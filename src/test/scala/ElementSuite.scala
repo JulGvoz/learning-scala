@@ -1,7 +1,7 @@
-import org.scalatest._
+import org.scalatest.funsuite.AnyFunSuite
 import element.Element.elem
 
-class ElementSuite extends FunSuite {
+class ElementSuite extends AnyFunSuite {
 
     test("elem result should have passed width") {
         val ele = elem('x', 2, 3)

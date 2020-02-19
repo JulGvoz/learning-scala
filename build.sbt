@@ -12,5 +12,3 @@ lazy val hello = (project in file("."))
   )
 
 scalacOptions := Seq("-unchecked", "-deprecation")
-scalafixDependencies in ThisBuild += "org.scalatest" %% "autofix" % "3.1.0.0" 
-addCompilerPlugin(scalafixSemanticdb) // enable SemanticDB

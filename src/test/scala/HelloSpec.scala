@@ -1,8 +1,9 @@
-import org.scalatest._
+import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.diagrams.Diagrams
 import element._
 import element.Element.elem
 
-class HelloSpec extends FunSuite with DiagrammedAssertions {
+class HelloSpec extends AnyFunSuite with Diagrams {
   test("Hello should start with H") {
     // Hello, as opposed to hello
     assert("Hello".startsWith("H"))
