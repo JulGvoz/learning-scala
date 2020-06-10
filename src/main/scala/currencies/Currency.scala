@@ -5,8 +5,6 @@ abstract class CurrencyZone {
     def make(x: Long): Currency
 
     val CurrencyUnit: Currency
-
-    
     
     object Converter {
       val exchangeRate: Map[String, Map[String, Double]] = ???
