@@ -3,7 +3,7 @@ package queue
 trait Queue[+T] {
   def head: T
   def tail: Queue[T]
-  def enqueue[U >: T](x: U): Queue[U]
+  def enqueue[U >: T](x: U): Queue[U] // U must be a supertype of T
 }
 
 object Queue {
