@@ -9,6 +9,7 @@ lazy val hello = (project in file("."))
   .settings(
     name := "Programming in Scala 2nd edition",
     libraryDependencies += scalaTest % Test,
+    libraryDependencies += "org.scala-lang.modules" %% "scala-swing" % "2.1.1",
   )
 
 scalacOptions := Seq("-unchecked", "-deprecation")

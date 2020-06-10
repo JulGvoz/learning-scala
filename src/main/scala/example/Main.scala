@@ -1,6 +1,5 @@
 package example
 
-import currencies.CurrencyZone
-
+import implicits.Implicits
 object ExampleShow extends App {
 } 
