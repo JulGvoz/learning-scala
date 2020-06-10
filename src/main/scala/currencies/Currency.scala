@@ -18,6 +18,10 @@ abstract class CurrencyZone {
     val CurrencyUnit: Currency
 
     
+    
+    object Converter {
+      val exchangeRate: Map[String, Map[String, Double]] = ???
+    }
 
     abstract class AbstractCurrency {
         val amount: Long
@@ -32,6 +36,14 @@ abstract class CurrencyZone {
         private def decimals(n: Long): Int = 
           if (n == 1) 0
           else 1 + decimals(n / 10)
+        
+        def from(other: CurrencyZone#AbstractCurrency): Currency =
+          make(
+            math.round(
+              other.amount.toDouble * Converter.exchangeRate
+                (other.designation)(this.designation)
+            )
+          )
     }
 }
 
