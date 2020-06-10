@@ -1,15 +1,4 @@
 package currencies
-/*
-abstract class Currency {
-    val amount: Long
-    def designation: String
-    override def toString(): String = amount.toString + " " + designation
-    def + (that: Currency): Currency;
-    def * (x: Double): Currency;
-}
-*/
-
-
 
 abstract class CurrencyZone {
     type Currency <: AbstractCurrency
