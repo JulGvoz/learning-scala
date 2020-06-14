@@ -101,3 +101,7 @@ class Rational(n: Int, d: Int) extends Ordered[Rational] {
 	private def gcd(a: Int, b: Int): Int =
 		if (b == 0) a else gcd(b, a % b)
 }
+
+object Rational {
+  implicit def intToRational(x: Int): Rational = new Rational(x)
+}
