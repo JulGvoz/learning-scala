@@ -1,27 +1,22 @@
 package example
+
+import rational.Rational
+import scala.Predef._
 object ExampleShow extends App {
-  case class PreferredPrompt(val preference: String)
-  case class PreferredDrink(val preference: String)
-
-  object Greeter {
-    def greet(name: String)(implicit prompt: PreferredPrompt, drink: PreferredDrink): Unit = {
-      println("Welcome "+ name +". The system is ready.")
-      println("But while you wrok, why not enjoy a cup of "+ drink.preference +"?")
-      println(prompt.preference)
+  def maxListUpBound[T <% Ordered[T]](elements: List[T]): T = 
+    elements match {
+      case List() => 
+        throw new IllegalArgumentException("empty list")
+      case List(x) => x
+      case x :: rest =>
+        val maxRest = maxListUpBound(rest)
+        if (x > maxRest) x
+        else maxRest
     }
-  }
+  
+  val rationalList = new Rational(3, 2) :: new Rational(5/3) :: new Rational (7, 4) :: Nil
+  val intList = 3 :: 2 :: 5 :: 9 :: 4 :: Nil
 
-  object JoesPrefs {
-    implicit val prompt = new PreferredPrompt("Yes, master> ")
-    implicit val drink = new PreferredDrink("tea")
-  }
-
-  val bobsPrompt = new PreferredPrompt("relax> ")
-  val bobsDrink = new PreferredDrink("coffee")
-
-  Greeter.greet("Bob")(bobsPrompt, bobsDrink)
-
-  import JoesPrefs._
-
-  Greeter.greet("Joe")
-} 
+  println(maxListUpBound(rationalList))
+  println(maxListUpBound(intList))
+}
