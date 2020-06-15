@@ -12,4 +12,8 @@ lazy val hello = (project in file("."))
     libraryDependencies += "org.scala-lang.modules" %% "scala-swing" % "2.1.1",
   )
 
-scalacOptions := Seq("-unchecked", "-deprecation")
+scalacOptions := Seq(
+  "-unchecked", 
+  "-deprecation",
+  // "-Xprint:typer"
+  )
