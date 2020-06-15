@@ -1,22 +1,43 @@
 package example
 
-import rational.Rational
-import scala.Predef._
 object ExampleShow extends App {
-  def maxListUpBound[T <% Ordered[T]](elements: List[T]): T = 
-    elements match {
-      case List() => 
-        throw new IllegalArgumentException("empty list")
-      case List(x) => x
-      case x :: rest =>
-        val maxRest = maxListUpBound(rest)
-        if (x > maxRest) x
-        else maxRest
-    }
-  
-  val rationalList = new Rational(3, 2) :: new Rational(5/3) :: new Rational (7, 4) :: Nil
-  val intList = 3 :: 2 :: 5 :: 9 :: 4 :: Nil
+  case class Person(
+    name: String,
+    isMale: Boolean,
+    children: Person*
+  )
 
-  println(maxListUpBound(rationalList))
-  println(maxListUpBound(intList))
+  val lara = Person("Lara", false)
+  val bob = Person("Bob", true)
+  val julie = Person("Julie", false, lara, bob)
+  val tommy = Person("Tommy", true, bob, lara)
+  val persons = tommy :: lara :: bob :: julie :: Nil
+
+  println(
+    persons filter (p => !p.isMale) flatMap (p => (
+      (p.children map (c => (p.name, c.name)))
+    ))
+  )
+
+  println(
+    persons withFilter (p => !p.isMale) flatMap (
+      p => (p.children map (c => (p.name, c.name)))
+    )
+  )
+
+  println(
+    for (
+      p <- persons;
+      if !p.isMale;
+      c <- p.children
+    ) yield (p.name, c.name)
+  )
+
+  println(
+    for {
+      p <- persons
+      n = p.name
+      if (n startsWith "To")
+     } yield n
+  )
 }
