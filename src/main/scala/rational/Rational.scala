@@ -1,5 +1,7 @@
 package rational
 
+import scala.language.implicitConversions
+
 class Rational(n: Int, d: Int) extends Ordered[Rational] {
 
 	require(d != 0)

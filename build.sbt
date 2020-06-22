@@ -15,5 +15,8 @@ lazy val hello = (project in file("."))
 scalacOptions := Seq(
   "-unchecked", 
   "-deprecation",
+  "-feature"
   // "-Xprint:typer"
   )
+
+cancelable in Global := true

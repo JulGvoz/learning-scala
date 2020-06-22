@@ -3,6 +3,7 @@ package implicits
 import javax.swing._
 import java.awt.event.ActionListener
 import java.awt.event.ActionEvent
+import scala.language.implicitConversions
 
 object Implicits {
   val button = new JButton
