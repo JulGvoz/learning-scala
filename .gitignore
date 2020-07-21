@@ -5,6 +5,7 @@
 null
 target
 *.class
+project/metals.sbt
 
 ### SBT ###
 # Simple Build Tool
