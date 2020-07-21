@@ -7,6 +7,7 @@ target
 *.class
 project/metals.sbt
 other
+*.xml
 
 ### SBT ###
 # Simple Build Tool
