@@ -37,6 +37,9 @@ object Example {
     case Email("tom", Domain("com", _*)) => true
     case _ => false
   }
+
+  val toms_support = "tom@support.epfl.ch"
+  val ExpandedEmail(name, topdom, subdoms @ _*) = toms_support
 }
 
 object Domain {
@@ -45,4 +48,14 @@ object Domain {
   
   def unapplySeq(whole: String): Option[Seq[String]] = 
     Some(whole.split("\\.").reverse.toSeq)
+}
+
+object ExpandedEmail {
+  def unapplySeq(email: String): Option[(String, Seq[String])] = {
+    val parts = email split "@"
+    if (parts.length == 2)
+      Some(parts(0), parts(1).split("\\.").reverse.toSeq)
+    else
+      None
+  }
 }
