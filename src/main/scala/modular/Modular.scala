@@ -1,6 +1,6 @@
 package org.stairwaybook.recipe
 
-import java.sql.DatabaseMetaData
+import _root_.org.stairwaybook.recipe.org.stairwaybook.recipe.FoodCategories
 
 abstract class Food(val name: String) {
   override def toString = name
@@ -26,15 +26,12 @@ abstract class Browser {
   }
 }
 
-abstract class Database {
+abstract class Database extends FoodCategories {
   def allFoods: List[Food]
   def allRecipes: List[Recipe]
 
   def foodNamed(name: String) = 
     allFoods.find(_.name == name)
-  
-  case class FoodCategory(name: String, foods: List[Food])
-  def allCategories: List[FoodCategory]
 }
 
 object Apple extends Food("Apple")
