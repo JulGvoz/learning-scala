@@ -1,7 +1,5 @@
 package org.stairwaybook.recipe
 
-import _root_.org.stairwaybook.recipe.org.stairwaybook.recipe.FoodCategories
-
 abstract class Food(val name: String) {
   override def toString = name
 }
