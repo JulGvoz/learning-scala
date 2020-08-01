@@ -101,7 +101,19 @@ class Rational(n: Int, d: Int) extends Ordered[Rational] {
 	}
 
 	private def gcd(a: Int, b: Int): Int =
-		if (b == 0) a else gcd(b, a % b)
+    if (b == 0) a else gcd(b, a % b)
+  
+  override def equals(that: Any): Boolean = that match {
+    case that: Rational => (that canEqual this) &&
+      numer == that.numer &&
+      denom == that.denom
+    
+    case _ => false
+  }
+
+  def canEqual(that: Any): Boolean = that.isInstanceOf[Rational]
+
+  override def hashCode: Int = (numer, denom).##
 }
 
 object Rational {
