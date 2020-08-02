@@ -137,4 +137,24 @@ object FutureExample {
     println(failedFallback.value)
     println(recoveredFallback.value)
   }
+
+  def transformRun(): Unit = {
+    val success = Future(42 / 2)
+    val failure = Future(42 / 0)
+
+    val first = success transform (
+      res => res * -1,
+      ex => new Exception("see cause", ex)
+    )
+
+    val second = failure transform (
+      res => res * -1,
+      ex => new Exception("see cause", ex)
+    )
+
+    Thread.sleep(1000)
+
+    println(first.value)
+    println(second.value)
+  }
 }
