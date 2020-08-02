@@ -11,6 +11,7 @@ lazy val hello = (project in file("."))
     libraryDependencies += scalaTest % Test,
     libraryDependencies += "org.scala-lang.modules" %% "scala-swing" % "2.1.1",
     libraryDependencies += "org.scala-lang.modules" %% "scala-xml" % "1.3.0",
+    libraryDependencies +=  "org.scalaj" %% "scalaj-http" % "2.4.2",
   )
 
 scalacOptions := Seq(

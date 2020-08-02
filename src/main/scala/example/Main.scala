@@ -1,7 +1,7 @@
 package example
 
-import futures.FutureExample
+import http.Example
 
 object ExampleShow extends App {
-  FutureExample.failureRun()
+  Example.run()
 }
