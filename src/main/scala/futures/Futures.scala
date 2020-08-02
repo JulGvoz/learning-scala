@@ -108,4 +108,33 @@ object FutureExample {
     println(valid3.value)
     println(invalid3.value)
   }
+
+  def failureRun(): Unit = {
+    val success = Future (42 / 2)
+    val unexpectedSuccess = success.failed
+    val failure = Future {42 / 0}
+    val expectedFailure = failure.failed
+
+    val fallback = failure.fallbackTo(success)
+    val failedFallback = failure.fallbackTo(Future{
+      val res = 42
+      require(res < 0)
+      res
+    })
+    val recoveredFallback = failedFallback recover {
+      case ex: ArithmeticException => -1
+    }
+
+    Thread.sleep(10)
+
+    println(failure.value)
+    println(expectedFailure.value)
+    println(unexpectedSuccess.value)
+
+    println("-------------------")
+
+    println(fallback.value)
+    println(failedFallback.value)
+    println(recoveredFallback.value)
+  }
 }
