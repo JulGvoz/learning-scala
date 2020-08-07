@@ -227,4 +227,20 @@ object FutureExample {
       case Failure(ex) => println(ex)
     }
   }
+
+  def otherRun(): Unit = {
+    val success = Future(42 / 2)
+    val failure = Future(42 / 0)
+
+    val futNum = Future(21 + 21)
+    val futStr = Future("ans" + "wer")
+
+    val fut = futNum.zipWith (futStr) {
+      (num, str) => s"$num is the $str"
+    }
+
+    Thread.sleep(1000)
+
+    println(fut.value)
+  }
 }
