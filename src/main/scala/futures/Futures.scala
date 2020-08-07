@@ -157,4 +157,47 @@ object FutureExample {
     println(first.value)
     println(second.value)
   }
+
+  def combiningRun(): Unit = {
+    val success = Future(42 / 2)
+    val failure = Future(42 / 0)
+
+    val recovered = failure recover {
+      case ex: ArithmeticException => -1
+    }
+
+    val fallback = failure fallbackTo success
+
+    val zippedSuccess = success zip recovered
+    val zippedFailure = failure zip success
+
+    // --------------
+
+    val fortyTwo = Future(21 + 21)
+    val fortySix = Future(23 + 23)
+    val futureNums = fortyTwo :: fortySix :: Nil
+
+    val folded = Future.foldLeft(futureNums)(1){
+      (acc, num) => acc * num
+    }
+    
+    val reduced = Future.reduceLeft(futureNums){
+      (acc, next) => acc + next
+    }
+
+    val futureList = Future.sequence(futureNums)
+    
+    val traversed = Future.traverse(List(1, 1, 2, 3, 5, 8, 13, 21)){
+      (i) => Future(i * 2)
+    }
+
+    Thread.sleep(1000)
+
+    println(zippedSuccess.value)
+    println(zippedFailure.value)
+    println(folded.value)
+    println(reduced.value)
+    println(futureList.value)
+    println(traversed.value)
+  }
 }
