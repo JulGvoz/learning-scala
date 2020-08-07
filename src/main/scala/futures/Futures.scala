@@ -3,6 +3,9 @@ package futures
 import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Promise
+import scala.util.Success
+import scala.util.Failure
+import scala.util.Try
 
 object FutureExample {
   def simpleRun(x: Int): Unit = {
@@ -199,5 +202,29 @@ object FutureExample {
     println(reduced.value)
     println(futureList.value)
     println(traversed.value)
+  }
+
+  def sideEffectRun(): Unit = {
+    val success = Future(42 / 2)
+    val failure = Future(42 / 0)
+
+    success.foreach(println _)
+    failure.foreach(println _)
+
+    for (res <- failure) println(res)
+    for (res <- success) println(res)
+
+    def evalTry[T](t: Try[T]): Unit = t match {
+      case Success(value) => println(value)
+      case Failure(exception) => println("Failed :/")
+    }
+
+    success onComplete evalTry
+    failure onComplete evalTry
+
+    val newFuture = success andThen {
+      case Success(res) => println(res * 2)
+      case Failure(ex) => println(ex)
+    }
   }
 }
