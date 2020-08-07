@@ -63,7 +63,7 @@ object FutureExample {
     val future_success = Future.fromTry(Success(21 + 21))
     val future_failed = Future.fromTry(Failure(new Exception("Ahh! Bummer!")))
 
-    val promise = Promise[Int]
+    val promise = Promise[Int]()
 
     val pro_fut = promise.future
 
@@ -145,12 +145,12 @@ object FutureExample {
     val success = Future(42 / 2)
     val failure = Future(42 / 0)
 
-    val first = success transform (
+    val first = success.transform(
       res => res * -1,
       ex => new Exception("see cause", ex)
     )
 
-    val second = failure transform (
+    val second = failure.transform(
       res => res * -1,
       ex => new Exception("see cause", ex)
     )
