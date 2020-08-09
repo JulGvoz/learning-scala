@@ -4,15 +4,19 @@ import scala.util.parsing.combinator._
 
 class JSON extends JavaTokenParsers {
   def value: Parser[Any] = obj | arr | stringLiteral |
-    floatingPointNumber ^^ (_.toDouble) | "null" | "true" ^^ (_ => true) | "false" ^^ (_ => false)
+    floatingPointNumber ^^ (_.toDouble) | "null" |
+     "true" ^^ (_ => true) | "false" ^^ (_ => false) |
+    failure("illegal start of value")
   
-  def obj: Parser[Map[String, Any]] = "{"~> repsep(member, ",") <~"}" ^^ (Map() ++ _)
+  def obj: Parser[Map[String, Any]] = "{"~> repsep(member, ",") <~"}" ^^ (Map() ++ _) |
+    failure("an object containing members")
 
-  def arr: Parser[List[Any]] = "["~> repsep(value, ",") <~"]"
+  def arr: Parser[List[Any]] = "["~> repsep(value, ",") <~"]" |
+    failure("an array of values")
 
   def member: Parser[(String, Any)] = stringLiteral~":"~value ^^ {
     case name~":"~value => (name, value)
-  }
+  } | failure("illegal member definition")
 }
 
 /**
