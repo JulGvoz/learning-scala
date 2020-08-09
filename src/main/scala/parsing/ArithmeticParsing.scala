@@ -7,3 +7,7 @@ class ArithmeticParsing extends JavaTokenParsers {
   def term: Parser[Any] = factor~rep("*"~factor | "/"~factor)
   def factor: Parser[Any] = floatingPointNumber | "("~expr~")"
 }
+
+object MyParsers extends RegexParsers {
+  val identifier: Parser[String] = """[a-zA-Z_]\w*""".r
+}
