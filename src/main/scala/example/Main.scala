@@ -1,10 +1,7 @@
 package example
 
-import parsing.ArithmeticParsing
+import parsing.ExampleJSON
 
 object ExampleShow extends App {
-  println("input: " + args(0))
-  val parser = new ArithmeticParsing
-  val parsed = parser.parseAll(parser.expr, args(0))
-  println(parsed)
+  println(ExampleJSON.run(args(0)))
 }
