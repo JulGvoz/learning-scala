@@ -3,7 +3,7 @@ package swing
 import scala.swing._
 import scala.swing.event.ButtonClicked
 
-object SecondSwingApp extends SimpleSwingApplication {
+object SecondSwingApp {
   def top = new MainFrame {
     title = "Second Swing App"
     val button = new Button {
